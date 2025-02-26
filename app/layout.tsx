@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, League_Spartan } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import type { Metadata } from "next";
+import { League_Spartan } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 
 
@@ -37,6 +38,7 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
+              <Navbar />
               {children}
           </ThemeProvider>
         </body>
