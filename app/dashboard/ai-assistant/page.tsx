@@ -81,8 +81,8 @@ function AIAssistant() {
             <Image src="/images/cat.png" alt="AI Avatar" layout="fill" className="rounded-full" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">Lily, Your AI Assistant</h1>
-            <p className="text-white text-sm">Powered by Advanced AI</p>
+            <h1 className="text-xl font-bold text-primary">Lily, Your AI Assistant</h1>
+            <p className="text-primary text-sm">Powered by Advanced AI</p>
           </div>
         </motion.div>
 
@@ -100,7 +100,7 @@ function AIAssistant() {
               >
                 <div
                   className={`max-w-[80%] px-4 py-3 rounded-2xl ${
-                    msg.sender === "ai" ? "bg-secondary text-white" : "bg-gray-200 text-black"
+                    msg.sender === "ai" ? "bg-secondary text-primary" : "bg-gray-200 text-black"
                   }`}
                   dangerouslySetInnerHTML={{ __html: msg.text }} // Allows formatted HTML
                 />
@@ -129,14 +129,14 @@ function AIAssistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-              className="w-full p-4 rounded-full border-2 border-secondary focus:ring-2 focus:ring-secondary text-white placeholder-gray-500 pr-24"
+              className="w-full p-4 rounded-full border-2 border-secondary focus:ring-2 focus:ring-secondary text-primary placeholder-gray-500 pr-24"
               placeholder="Ask me anything..."
             />
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={sendMessage}
-              className="absolute right-2 top-2 bg-secondary px-6 py-2 rounded-full font-medium text-white transition-colors hover:bg-opacity-80"
+              className="absolute right-2 top-2 bg-secondary px-6 py-2 rounded-full font-medium text-primary transition-colors hover:bg-opacity-80"
               disabled={isLoading}
             >
               Send

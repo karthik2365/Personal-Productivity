@@ -29,6 +29,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { ModeToggle } from "./mode-toggle"
 
 // Define the categories with their icons and routes
 const categories = [
@@ -87,10 +89,10 @@ export function ProductivitySidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="border-b border-sidebar-border">
-        <div className="flex items-center gap-2 px-4 py-3">
+        <Link href={'/'} className="flex items-center gap-2 px-4 py-3">
           <Rocket className="h-6 w-6 text-primary" />
-          <span className="text-lg font-semibold">ProductivityHub</span>
-        </div>
+          <span className="text-lg font-semibold">Prodo</span>
+        </Link>
         <div className="px-4 pb-3">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -126,6 +128,7 @@ export function ProductivitySidebar() {
             <Settings className="mr-2 h-4 w-4" />
             Settings
           </Button>
+          <ModeToggle />
         </div>
       </SidebarFooter>
       <SidebarRail />
