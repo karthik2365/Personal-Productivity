@@ -1,10 +1,15 @@
-"use client";
+// "use client";
 
 
-export default function Home() {
+import React from 'react'
+import Navbar from "@/components/Navbar";
+
+function page() {
   return (
     <div>
-      Home Page
+      <Navbar />
     </div>
-  );
+  )
 }
+
+export default page

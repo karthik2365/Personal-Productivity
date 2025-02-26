@@ -1,0 +1,69 @@
+"use client"
+import React, { useState, useEffect } from "react";
+
+export default function TimeManagementTools() {
+  const [time, setTime] = useState(25 * 60); // Default 25-minute timer
+  const [isRunning, setIsRunning] = useState(false);
+  const [inputMinutes, setInputMinutes] = useState(25);
+
+  useEffect(() => {
+    let timer;
+    if (isRunning && time > 0) {
+      timer = setInterval(() => setTime((prevTime) => prevTime - 1), 1000);
+    } else {
+      clearInterval(timer);
+    }
+    return () => clearInterval(timer);
+  }, [isRunning, time]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  };
+
+  const handleStart = () => {
+    setTime(inputMinutes * 60);
+    setIsRunning(true);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-[rgb(37,99,235)]">
+      <h1 className="text-3xl font-bold mb-6">Time Management Tools</h1>
+      <div className="border border-[rgb(37,99,235)] p-6 rounded-lg text-center">
+        <h2 className="text-2xl mb-4">Pomodoro Timer</h2>
+        <input
+          type="number"
+          className="mb-4 p-2 text-black rounded-md w-20 text-center"
+          value={inputMinutes}
+          onChange={(e) => setInputMinutes(e.target.value)}
+          min="1"
+        />
+        <div className="text-4xl font-bold mb-4">{formatTime(time)}</div>
+        <div className="flex gap-4">
+          <button 
+            className="px-4 py-2 bg-[rgb(37,99,235)] text-black rounded-md"
+            onClick={handleStart}
+          >
+            Start
+          </button>
+          <button 
+            className="px-4 py-2 bg-[rgb(37,99,235)] text-black rounded-md"
+            onClick={() => setIsRunning(!isRunning)}
+          >
+            {isRunning ? "Pause" : "Resume"}
+          </button>
+          <button 
+            className="px-4 py-2 bg-[rgb(37,99,235)] text-black rounded-md"
+            onClick={() => {
+              setIsRunning(false);
+              setTime(inputMinutes * 60);
+            }}
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

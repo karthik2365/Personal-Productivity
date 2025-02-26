@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { ModeToggle } from './mode-toggle'
 import { MessageCircleIcon } from 'lucide-react'
+import AIAssistant from '@/app/chat/page'
 
 function navbar() {
   return (
@@ -26,7 +27,6 @@ function navbar() {
           <UserButton />
         </SignedIn>
 
-        {/* <ChatUI/> */}
       </div>
     </nav>
   )

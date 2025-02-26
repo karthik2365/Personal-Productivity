@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 
-export default function AIAssistant() {
+function AIAssistant() {
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -157,3 +157,5 @@ export default function AIAssistant() {
     </div>
   )
 }
+
+export default  AIAssistant;
