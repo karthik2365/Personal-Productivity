@@ -53,7 +53,7 @@ const categories = [
     route: "/productivity-analytics",
   },
   {
-    title: "AI-powered Assistants",
+    title: "AI-powered Assistant",
     icon: Bot,
     route: "/dashboard/ai-assistant",
   },
@@ -111,7 +111,7 @@ export function ProductivitySidebar() {
               <Button
                 onClick={() => router.push(category.route)}
                 variant="ghost"
-                className="w-full justify-start text-sm font-normal flex items-center gap-3"
+                className="w-full justify-start text-sm font-normal flex items-center gap-3 truncate"
               >
                 <category.icon className="h-4 w-4" />
                 <span>{category.title}</span>
