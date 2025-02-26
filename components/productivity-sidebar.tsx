@@ -123,7 +123,7 @@ export function ProductivitySidebar() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="border-t border-sidebar-border p-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <Button variant="outline" size="sm" className="w-full">
             <Settings className="mr-2 h-4 w-4" />
             Settings
