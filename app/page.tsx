@@ -7,13 +7,13 @@ import ChatUI from "@/components/assistant";
 
 export default function Navbar() {
   return (
-    <nav className="bg-black text-white px-6 py-4 flex justify-between items-center">
+    <nav className="bg-primary text-secondary px-6 py-4 flex justify-between items-center">
       <Link href="/" className="text-xl font-bold">
         Prodo
       </Link>
 
       <div className="flex items-center gap-4">
-        <ModeToggle />
+        <ModeToggle/>
 
         <SignedOut>
           <SignInButton />
