@@ -78,7 +78,7 @@ function AIAssistant() {
           className="p-4 flex items-center space-x-4 rounded-t-xl bg-secondary"
         >
           <div className="relative w-12 h-12">
-            <Image src="/images/bot.png" alt="AI Avatar" layout="fill" className="rounded-full" />
+            <Image src="/images/cat.png" alt="AI Avatar" layout="fill" className="rounded-full" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">Lily, Your AI Assistant</h1>
