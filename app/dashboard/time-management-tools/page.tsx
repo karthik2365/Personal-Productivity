@@ -1,22 +1,22 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 
 export default function TimeManagementTools() {
-  const [time, setTime] = useState(25 * 60); // Default 25-minute timer
-  const [isRunning, setIsRunning] = useState(false);
-  const [inputMinutes, setInputMinutes] = useState(25);
+  const [time, setTime] = useState<number>(25 * 60); // Default 25-minute timer
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [inputMinutes, setInputMinutes] = useState<number>(25);
 
   useEffect(() => {
-    let timer;
+    let timer: NodeJS.Timeout | undefined;
     if (isRunning && time > 0) {
       timer = setInterval(() => setTime((prevTime) => prevTime - 1), 1000);
     } else {
-      clearInterval(timer);
+      if (timer) clearInterval(timer);
     }
     return () => clearInterval(timer);
   }, [isRunning, time]);
 
-  const formatTime = (seconds) => {
+  const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
@@ -36,24 +36,24 @@ export default function TimeManagementTools() {
           type="number"
           className="mb-4 p-2 text-black rounded-md w-20 text-center"
           value={inputMinutes}
-          onChange={(e) => setInputMinutes(e.target.value)}
+          onChange={(e) => setInputMinutes(Number(e.target.value))}
           min="1"
         />
         <div className="text-4xl font-bold mb-4">{formatTime(time)}</div>
         <div className="flex gap-4">
-          <button 
+          <button
             className="px-4 py-2 bg-[rgb(37,99,235)] text-black rounded-md"
             onClick={handleStart}
           >
             Start
           </button>
-          <button 
+          <button
             className="px-4 py-2 bg-[rgb(37,99,235)] text-black rounded-md"
             onClick={() => setIsRunning(!isRunning)}
           >
             {isRunning ? "Pause" : "Resume"}
           </button>
-          <button 
+          <button
             className="px-4 py-2 bg-[rgb(37,99,235)] text-black rounded-md"
             onClick={() => {
               setIsRunning(false);

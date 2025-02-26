@@ -31,15 +31,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${leagueSpartan.className} antialiased`}>
-          <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {/* <Navbar /> */}
-              {children}
+        <body className="antialiased">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            {children}  {/* No sidebar here */}
           </ThemeProvider>
         </body>
       </html>

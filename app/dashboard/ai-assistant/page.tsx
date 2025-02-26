@@ -4,6 +4,22 @@ import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 
+// Function to format AI response for better readability
+const formatResponse = (text: string): string => {
+  try {
+    // Attempt to parse JSON and format it
+    const json = JSON.parse(text);
+    return `<pre>${JSON.stringify(json, null, 2)}</pre>`; // Pretty-print JSON
+  } catch (error) {
+    // Handle other formats: Markdown, lists, bold text, etc.
+    return text
+      .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // Bold (**bold** → <b>bold</b>)
+      .replace(/- (.+)/g, "• $1") // Lists (- item → • item)
+      .replace(/```([\s\S]*?)```/g, "<pre>$1</pre>") // Code blocks (```code```)
+      .replace(/\n/g, "<br />"); // Preserve line breaks
+  }
+}
+
 function AIAssistant() {
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([])
   const [input, setInput] = useState("")
@@ -34,7 +50,9 @@ function AIAssistant() {
       })
 
       const data = await response.json()
-      const aiMessage = { sender: "ai", text: data.response || "I apologize, I need to process that request further." }
+      const formattedText = formatResponse(data.response || "I apologize, I need to process that request further.")
+      const aiMessage = { sender: "ai", text: formattedText }
+
       setMessages((prevMessages) => [...prevMessages, aiMessage])
     } catch (error) {
       const errorMessage = { sender: "ai", text: "An error occurred. Please try again." }
@@ -45,32 +63,22 @@ function AIAssistant() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black p-6">
+    <div className="min-h-screen flex items-center justify-center p-6">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-3xl bg-black rounded-xl overflow-hidden border-2 border-green-600 shadow-lg"
+        className="w-full max-w-3xl rounded-xl overflow-hidden border-2 border-secondary shadow-lg"
       >
         {/* Header */}
         <motion.div
           initial={{ y: -50 }}
           animate={{ y: 0 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
-          className="bg-green-600 p-4 flex items-center space-x-4 rounded-t-xl"
+          className="p-4 flex items-center space-x-4 rounded-t-xl bg-secondary"
         >
           <div className="relative w-12 h-12">
             <Image src="/images/bot.png" alt="AI Avatar" layout="fill" className="rounded-full" />
-            <motion.div
-              animate={{
-                boxShadow: ["0 0 0 0 rgba(0,0,0,0.7)", "0 0 0 8px rgba(0,0,0,0)"],
-              }}
-              transition={{
-                repeat: Number.POSITIVE_INFINITY,
-                duration: 1.5,
-              }}
-              className="absolute inset-0 rounded-full"
-            />
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">Lily, Your AI Assistant</h1>
@@ -92,11 +100,10 @@ function AIAssistant() {
               >
                 <div
                   className={`max-w-[80%] px-4 py-3 rounded-2xl ${
-                    msg.sender === "ai" ? "bg-green-600 text-black" : "bg-black text-green-600 border border-green-600"
+                    msg.sender === "ai" ? "bg-secondary text-white" : "bg-gray-200 text-black"
                   }`}
-                >
-                  <p className="break-words">{msg.text}</p>
-                </div>
+                  dangerouslySetInnerHTML={{ __html: msg.text }} // Allows formatted HTML
+                />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -106,47 +113,30 @@ function AIAssistant() {
               animate={{ opacity: 1 }}
               className="flex justify-start items-center space-x-2"
             >
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 0.6 }}
-                className="w-2 h-2 bg-green-600 rounded-full"
-              />
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 0.6, delay: 0.2 }}
-                className="w-2 h-2 bg-green-600 rounded-full"
-              />
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 0.6, delay: 0.4 }}
-                className="w-2 h-2 bg-green-600 rounded-full"
-              />
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 0.6 }} className="w-2 h-2 bg-secondary rounded-full" />
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 0.6, delay: 0.2 }} className="w-2 h-2 bg-secondary rounded-full" />
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 0.6, delay: 0.4 }} className="w-2 h-2 bg-secondary rounded-full" />
             </motion.div>
           )}
           <div ref={messagesEndRef} />
         </div>
 
         {/* Input section */}
-        <motion.div
-          initial={{ y: 50 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.4, type: "spring", stiffness: 120 }}
-          className="p-6 bg-black border-t-2 border-green-600"
-        >
+        <motion.div className="p-6 border-t-2 border-secondary">
           <div className="relative">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-              className="w-full p-4 bg-black rounded-full border-2 border-green-600 focus:ring-2 focus:ring-green-600 text-green-600 placeholder-green-600/50 pr-24"
+              className="w-full p-4 rounded-full border-2 border-secondary focus:ring-2 focus:ring-secondary text-white placeholder-gray-500 pr-24"
               placeholder="Ask me anything..."
             />
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={sendMessage}
-              className="absolute right-2 top-2 bg-green-600 px-6 py-2 rounded-full font-medium text-black transition-colors hover:bg-green-500"
+              className="absolute right-2 top-2 bg-secondary px-6 py-2 rounded-full font-medium text-white transition-colors hover:bg-opacity-80"
               disabled={isLoading}
             >
               Send

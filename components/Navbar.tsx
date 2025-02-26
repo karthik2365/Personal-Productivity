@@ -2,21 +2,21 @@ import { SignedOut, SignInButton, SignedIn, UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 import React from 'react'
 import { ModeToggle } from './mode-toggle'
-import { MessageCircleIcon } from 'lucide-react'
-import AIAssistant from '@/app/chat/page'
+import { LayoutDashboard } from 'lucide-react'
 
-function navbar() {
+function Navbar() {
   return (
-    <nav className="bg-primary text-secondary px-6 py-4 flex justify-between items-center">
+    <nav className="bg-secondary text-primary px-6 py-4 flex justify-between items-center">
       <Link href="/" className="text-xl font-bold">
         Prodo
       </Link>
 
-      <div className="flex items-center gap-8">
-        <ModeToggle/>
+      <div className="flex items-center gap-6">
+        <ModeToggle />
 
-        <Link href="/chat">
-          <MessageCircleIcon />
+        <Link href="/dashboard" className="flex items-center gap-2 text-primary bg-secondary px-4 py-2 rounded-lg hover:bg-accent-dark transition">
+          <LayoutDashboard size={20} />
+          <span>Dashboard</span>
         </Link>
 
         <SignedOut>
@@ -26,10 +26,9 @@ function navbar() {
         <SignedIn>
           <UserButton />
         </SignedIn>
-
       </div>
     </nav>
   )
 }
 
-export default navbar
+export default Navbar

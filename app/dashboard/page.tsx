@@ -1,34 +1,22 @@
-import { ProductivitySidebar } from "@/components/productivity-sidebar"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-
 export default function Home() {
   return (
-    <SidebarProvider>
-      <ProductivitySidebar />
-      <SidebarInset>
-        <div className="flex flex-col min-h-screen bg-black text-[rgb(37,99,235)]">
-          <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-black px-6 text-[rgb(37,99,235)]">
-            <h1 className="text-xl font-semibold">Productivity Dashboard</h1>
-          </header>
-          <main className="flex-1 p-6">
-            <div className="grid gap-6">
-              <div className="rounded-lg border bg-card p-6 text-[rgb(37,99,235)]">
-                <h2 className="text-lg font-semibold mb-4">Welcome to your Productivity Hub</h2>
-                <p className="text-muted-foreground">
-                  Select a category from the sidebar to get started with your productivity journey.
-                </p>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="rounded-lg border bg-card p-6 text-[rgb(37,99,235)]">
-                    <div className="h-40 rounded-md bg-muted/50"></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </main>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
-  )
+    <div className="flex flex-col gap-6 w-full px-6">
+      {/* Welcome Message */}
+      <div className="rounded-lg border bg-card p-6 text-[rgb(37,99,235)] w-full">
+        <h2 className="text-lg font-semibold mb-4">Welcome to your Productivity Hub</h2>
+        <p className="text-muted-foreground">
+          Select a category from the sidebar to get started with your productivity journey.
+        </p>
+      </div>
+
+      {/* Grid for Cards - Spans Full Width */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="rounded-lg border bg-card p-6 text-[rgb(37,99,235)] w-full">
+            <div className="h-40 rounded-md bg-muted/50 w-full"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

@@ -55,7 +55,7 @@ const categories = [
   {
     title: "AI-powered Assistants",
     icon: Bot,
-    route: "/ai-assistants",
+    route: "/dashboard/ai-assistant",
   },
   {
     title: "Collaboration & Accountability",
