@@ -37,7 +37,7 @@ const categories = [
   {
     title: "Time Management Tools",
     icon: AlarmClock,
-    route: "/dashboard/time-management-tools",
+    route: "/dashboard/[time-management-tools]/time-management",
   },
   {
     title: "Goal Tracking & Motivation",
