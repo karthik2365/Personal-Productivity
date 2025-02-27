@@ -16,7 +16,7 @@ function Page() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {/* PomoDone Timer Card */}
           <Link
-            href={`/dashboard/${timeManagementTool}/time-management`}
+            href={`/dashboard/time-management-tools/time-management`}
             className="transition-transform hover:scale-105"
           >
             <Card className="h-full border-white/20 bg-card/50 backdrop-blur text-white">
@@ -44,7 +44,7 @@ function Page() {
 
           {/* Loans Card */}
           <Link
-            href={`/dashboard/${timeManagementTool}/clockify`}
+            href={`/dashboard/time-management-tools/clockify`}
             className="transition-transform hover:scale-105"
           >
             <Card className="h-full border-white/20 bg-card/50 backdrop-blur text-white">
