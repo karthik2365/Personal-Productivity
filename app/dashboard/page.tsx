@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const Dashboard: React.FC = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-primary text-center">Empower Your Productivity</h1>
+<h1 className="text-3xl font-bold mb-6 text-green-600 text-center">Empower Your Productivity</h1>
       
       <div className="grid grid-cols-2 gap-6">
         <Section title="Time Management Tools" description="Stay organized with timers, scheduling, and reminders to enhance time efficiency." />
@@ -22,8 +22,8 @@ const Dashboard: React.FC = () => {
 
 const Section: React.FC<{ title: string; description: string }> = ({ title, description }) => {
   return (
-    <Card className="shadow-md rounded-lg transition-transform transform hover:scale-105 hover:bg-secondary bg-card text-card-foreground aspect-square flex items-center justify-center">
-      <CardContent className="p-4 text-center">
+<Card className="shadow-md rounded-lg transition-transform transform hover:scale-105 hover:bg-secondary bg-card text-card-foreground aspect-square flex items-center justify-center border-2 border-green-500">
+<CardContent className="p-4 text-center">
         <h2 className="text-xl font-semibold mb-2 text-primary">{title}</h2>
         <p className="text-muted-foreground">{description}</p>
       </CardContent>

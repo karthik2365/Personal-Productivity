@@ -42,7 +42,7 @@ const categories = [
   {
     title: "Goal Tracking",
     icon: Target,
-    route: "/dashboard/goal-tracking-motivation",
+    route: "/dashboard/goal-tracking",
   },
   {
     title: "Study & Learning Efficiency",
@@ -62,7 +62,7 @@ const categories = [
   {
     title: "Community Forum",
     icon: Users,
-    route: "/collaboration",
+    route: "/dashboard/community-forum",
   },
   {
     title: "Productivity & Motivation",
@@ -92,8 +92,8 @@ export function ProductivitySidebar() {
         <Link href={'/'} className="flex items-center gap-2 px-4 py-3">
           <Rocket className="h-6 w-6 text-primary" />
           {/*className={`${silkScreen.className} text-lg font-semibold `} */}
-          <span className="text-lg font-semibold ">Prodo</span>
-        </Link>
+          <span className="text-lg font-semibold text-green-600">Prodo</span>
+          </Link>
         <div className="px-4 pb-3">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />

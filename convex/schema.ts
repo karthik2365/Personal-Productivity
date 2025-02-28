@@ -22,6 +22,23 @@ posts: defineTable({
     author: v.string(),
     authorInitial: v.string(),
   }),
+  goals: defineTable({
+    title: v.string(),
+    description: v.string(),
+    timeframe: v.union(v.literal("day"), v.literal("month")),
+    target: v.number(),
+    progress: v.number(),
+    status: v.union(v.literal("not_started"), v.literal("in_progress"), v.literal("completed")),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    progressUpdates: v.array(
+      v.object({
+        value: v.number(),
+        note: v.string(),
+        timestamp: v.number(),
+      }),
+    ),
+  }),
 
 }
 );
