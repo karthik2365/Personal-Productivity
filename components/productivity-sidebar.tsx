@@ -40,7 +40,7 @@ const categories = [
     route: "/dashboard/time-management-tools",
   },
   {
-    title: "Goal Tracking & Motivation",
+    title: "Goal Tracking",
     icon: Target,
     route: "/dashboard/goal-tracking-motivation",
   },

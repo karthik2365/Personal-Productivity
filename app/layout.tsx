@@ -1,11 +1,14 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { League_Spartan } from "next/font/google";
+import { League_Spartan, Silkscreen } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-
+export const silkScreen = Silkscreen({
+  subsets: ["latin"],
+  weight: "400"
+});
 
 const leagueSpartan = League_Spartan({
   subsets: ["latin"],

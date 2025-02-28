@@ -1,12 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 
 export default function CalendarWithSavedList() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [entries, setEntries] = useState<{ [key: string]: string[] }>({});
   const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    if (selectedDate === null) {
+      setSelectedDate(new Date());
+    }
+  }, [selectedDate]); // Ensures the update only happens when selectedDate is null
 
   const handleSave = () => {
     if (!inputValue || !selectedDate) return;
@@ -16,7 +22,7 @@ export default function CalendarWithSavedList() {
       ...prev,
       [dateKey]: [...(prev[dateKey] || []), inputValue],
     }));
-    setInputValue(""); // Clear input field after saving
+    setInputValue("");
   };
 
   return (
@@ -24,13 +30,15 @@ export default function CalendarWithSavedList() {
       <div className="flex flex-col items-center p-6 bg-gray-900 text-white rounded-2xl shadow-lg w-[400px]">
         <h1 className="text-xl font-bold text-gray-200 mb-4">Calendar with Entries</h1>
 
-        {/* Calendar Component */}
-        <Calendar 
-          mode="single"
-          selected={selectedDate}
-          onSelect={(date) => setSelectedDate(date)}
-          className="mb-4 border border-gray-700 rounded-lg p-2 w-full bg-gray-800 text-gray-300"
-        />
+        {/* Calendar Component (Render Only When selectedDate is Not Null) */}
+        {selectedDate && (
+          <Calendar
+            mode="single"
+            selected={selectedDate}
+            onSelect={(date) => setSelectedDate(date)}
+            className="mb-4 border border-gray-700 rounded-lg p-2 w-full bg-gray-800 text-gray-300"
+          />
+        )}
 
         {/* Input for Adding Entries */}
         <input
