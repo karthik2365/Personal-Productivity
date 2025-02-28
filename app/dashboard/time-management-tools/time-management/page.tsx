@@ -55,7 +55,11 @@ export default function CyberTimer() {
     max: number
   ) => {
     const num = parseInt(value, 10);
-    setter(isNaN(num) ? 0 : Math.min(max, Math.max(0, num)));
+    if (isNaN(num)) {
+      setter(0);
+    } else {
+      setter(Math.min(max, Math.max(0, num)));
+    }
   };
 
   const resetTimer = () => {
@@ -67,8 +71,8 @@ export default function CyberTimer() {
   };
 
   const addTask = () => {
-    if (task.trim()) {
-      setTasks([...tasks, task.trim()]);
+    if (task.trim() !== "") {
+      setTasks([...tasks, task]);
       setTask("");
     }
   };
@@ -127,29 +131,32 @@ export default function CyberTimer() {
         </div>
       </motion.div>
 
-      <div className="mt-6 w-96">
-        <div className="flex gap-2">
-          <input
-            type="text"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none"
-            placeholder="Enter your task..."
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-          />
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="p-2 bg-black text-white rounded-lg"
-            onClick={addTask}
-          >
-            <Plus size={24} />
-          </motion.button>
-        </div>
-        <ul className="mt-4 space-y-2">
-          {tasks.map((t, index) => (
-            <li key={index} className="p-2 bg-gray-100 rounded-lg">{t}</li>
-          ))}
-        </ul>
+      {/* Task Input */}
+      <div className="mt-6 flex gap-2">
+        <input
+          type="text"
+          className="p-2 border border-gray-400 rounded-md w-72"
+          placeholder="Enter a task..."
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="p-2 bg-black text-white rounded-md"
+          onClick={addTask}
+        >
+          <Plus size={20} />
+        </motion.button>
+      </div>
+
+      {/* Task List */}
+      <div className="mt-4 w-96">
+        {tasks.map((t, index) => (
+          <div key={index} className="p-2 border-b border-gray-300 text-black">
+            {t}
+          </div>
+        ))}
       </div>
     </div>
   );
