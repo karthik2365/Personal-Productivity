@@ -7,7 +7,7 @@ import { silkScreen } from '@/app/layout'
 
 function Navbar() {
   return (
-    <div className="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center border-b border-gray-300 dark:border-white bg-white dark:bg-black">
+    <div className='h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-green-500 flex justify-between items-center'>
       <Link href="/" className={`${silkScreen.className} text-4xl font-bold text-black dark:text-white`}>
         Prodo
       </Link>

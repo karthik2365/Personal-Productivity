@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { BentoGrid } from '@/components/ui/bento-grid';
 import { BentoGridDemo } from './home/page';
 import { Cover } from '@/components/ui/cover';
+import ProductivityDashboard from './dashboard/productivity-analytics/page';
 // import { GlowingEffectDemo } from './home/page';
 
 function page() {
@@ -21,7 +22,6 @@ function page() {
     </div>
       <BentoGridDemo/>
       {/* <GlowingEffectDemo/> */}
-
     </div>
   )
 }

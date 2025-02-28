@@ -52,7 +52,7 @@ const categories = [
   {
     title: "Productivity Analytics",
     icon: BarChart3,
-    route: "/productivity-analytics",
+    route: "/dashboard/productivity-analytics",
   },
   {
     title: "AI-powered Assistant",
@@ -65,7 +65,7 @@ const categories = [
     route: "/collaboration",
   },
   {
-    title: "Gamified Productivity & Motivation",
+    title: "Productivity & Motivation",
     icon: Gamepad2,
     route: "/gamified-productivity",
   },
@@ -91,7 +91,8 @@ export function ProductivitySidebar() {
       <SidebarHeader className="border-b border-sidebar-border">
         <Link href={'/'} className="flex items-center gap-2 px-4 py-3">
           <Rocket className="h-6 w-6 text-primary" />
-          <span className="text-lg font-semibold">Prodo</span>
+          {/*className={`${silkScreen.className} text-lg font-semibold `} */}
+          <span className="text-lg font-semibold ">Prodo</span>
         </Link>
         <div className="px-4 pb-3">
           <div className="relative">
