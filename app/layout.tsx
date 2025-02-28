@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ConvexProvider, ConvexReactClient } from "convex/react";
 import type { Metadata } from "next";
 import { League_Spartan, Silkscreen } from "next/font/google";
 import "./globals.css";
@@ -23,7 +24,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    < ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className="antialiased">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
@@ -31,6 +32,6 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
+    </ ClerkProvider>
   );
 }

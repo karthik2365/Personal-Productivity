@@ -3,6 +3,9 @@
 
 import React from 'react'
 import Navbar from "@/components/Navbar";
+import ForumHeader from "@/components/forum-header"
+import PostForm from "@/components/post-form"
+import PostList from "@/components/post-list"
 import { BentoGrid } from '@/components/ui/bento-grid';
 import { BentoGridDemo } from './home/page';
 import { Cover } from '@/components/ui/cover';
@@ -22,6 +25,15 @@ function page() {
     </div>
       <BentoGridDemo/>
       {/* <GlowingEffectDemo/> */}
+      {/* <main className="min-h-screen bg-[#e8f4e5] py-8 px-4">
+      <div className="max-w-3xl mx-auto">
+        <ForumHeader />
+        <div className="space-y-6">
+          <PostForm />
+          <PostList />
+        </div>
+      </div>
+    </main> */}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Play, Pause, RotateCcw } from "lucide-react";
+import { Play, Pause, RotateCcw, Plus } from "lucide-react";
 
 const MAX_HOURS = 24;
 const MAX_MINUTES = 59;
@@ -11,8 +11,10 @@ export default function CyberTimer() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
-  const [time, setTime] = useState(hours * 3600 + minutes * 60 + seconds); // Total time in seconds
+  const [time, setTime] = useState(hours * 3600 + minutes * 60 + seconds);
   const [isRunning, setIsRunning] = useState(false);
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState<string[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -26,7 +28,7 @@ export default function CyberTimer() {
             audioRef.current?.play();
             return 0;
           }
-          return prev - 1; // Decrement time every second
+          return prev - 1;
         });
       }, 1000);
     } else {
@@ -39,7 +41,6 @@ export default function CyberTimer() {
   }, [isRunning]);
 
   useEffect(() => {
-    // Update hours, minutes, and seconds whenever `time` changes
     const hrs = Math.floor(time / 3600);
     const mins = Math.floor((time % 3600) / 60);
     const secs = time % 60;
@@ -48,24 +49,13 @@ export default function CyberTimer() {
     setSeconds(secs);
   }, [time]);
 
-  const formatTime = (h: number, m: number, s: number) => {
-    const hrs = h.toString().padStart(2, "0");
-    const mins = m.toString().padStart(2, "0");
-    const secs = s.toString().padStart(2, "0");
-    return `${hrs}:${mins}:${secs}`;
-  };
-
   const handleInputChange = (
     setter: React.Dispatch<React.SetStateAction<number>>,
     value: string,
     max: number
   ) => {
     const num = parseInt(value, 10);
-    if (isNaN(num)) {
-      setter(0);
-    } else {
-      setter(Math.min(max, Math.max(0, num)));
-    }
+    setter(isNaN(num) ? 0 : Math.min(max, Math.max(0, num)));
   };
 
   const resetTimer = () => {
@@ -73,24 +63,20 @@ export default function CyberTimer() {
     setHours(0);
     setMinutes(25);
     setSeconds(0);
-    setTime(25 * 60); // Reset to 25 minutes
+    setTime(25 * 60);
   };
 
-  // Snowflakes animation
-  const snowflakesRef = useRef(
-    Array.from({ length: 100 }).map(() => ({
-      left: Math.random() * 100,
-      duration: Math.random() * 3 + 2,
-      delay: Math.random() * 5,
-    }))
-  );
+  const addTask = () => {
+    if (task.trim()) {
+      setTasks([...tasks, task.trim()]);
+      setTask("");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 relative overflow-hidden">
-      {/* Audio for alarm */}
       <audio ref={audioRef} src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" />
 
-      {/* Timer Display */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -125,7 +111,7 @@ export default function CyberTimer() {
             className="p-3 rounded-full bg-white text-black"
             onClick={() => {
               setIsRunning(!isRunning);
-              setTime(hours * 3600 + minutes * 60 + seconds); // Sync time with inputs
+              setTime(hours * 3600 + minutes * 60 + seconds);
             }}
           >
             {isRunning ? <Pause size={24} /> : <Play size={24} />}
@@ -141,22 +127,29 @@ export default function CyberTimer() {
         </div>
       </motion.div>
 
-      {/* Falling Black Dots (Snowflakes) */}
-      <div className="absolute inset-0 pointer-events-none">
-        {snowflakesRef.current.map((flake, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-black rounded-full"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: "100vh" }}
-            transition={{
-              duration: flake.duration,
-              repeat: Infinity,
-              delay: flake.delay,
-            }}
-            style={{ left: `${flake.left}vw` }}
+      <div className="mt-6 w-96">
+        <div className="flex gap-2">
+          <input
+            type="text"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none"
+            placeholder="Enter your task..."
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
           />
-        ))}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="p-2 bg-black text-white rounded-lg"
+            onClick={addTask}
+          >
+            <Plus size={24} />
+          </motion.button>
+        </div>
+        <ul className="mt-4 space-y-2">
+          {tasks.map((t, index) => (
+            <li key={index} className="p-2 bg-gray-100 rounded-lg">{t}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );

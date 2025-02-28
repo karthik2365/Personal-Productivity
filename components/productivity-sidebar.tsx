@@ -60,7 +60,7 @@ const categories = [
     route: "/dashboard/ai-assistant",
   },
   {
-    title: "Collaboration & Accountability",
+    title: "Community Forum",
     icon: Users,
     route: "/collaboration",
   },
