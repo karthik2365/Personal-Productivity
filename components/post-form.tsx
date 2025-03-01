@@ -89,39 +89,41 @@ export default function PostForm() {
           }}
           className="space-y-4"
         >
-          <div className="space-y-2">
-            <Label htmlFor="author">Your Name</Label>
-            <Input
-              id="author"
-              placeholder="Enter your name"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              className="bg-[#e8f4e5] border-0"
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="title">Title</Label>
-            <Input
-              id="title"
-              placeholder="Post title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="bg-[#e8f4e5] border-0"
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="content">Content</Label>
-            <Textarea
-              id="content"
-              placeholder="Share your thoughts..."
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="min-h-[120px] bg-[#e8f4e5] border-0"
-              required
-            />
-          </div>
+<div className="space-y-2">
+  <Label htmlFor="author" className="text-black">Your Name</Label>
+  <Input
+    id="author"
+    placeholder="Enter your name"
+    value={author}
+    onChange={(e) => setAuthor(e.target.value)}
+    className="bg-[#e8f4e5] border-0 text-black"
+    required
+  />
+</div>
+
+<div className="space-y-2">
+  <Label htmlFor="title" className="text-black">Title</Label>
+  <Input
+    id="title"
+    placeholder="Post title"
+    value={title}
+    onChange={(e) => setTitle(e.target.value)}
+    className="bg-[#e8f4e5] border-0 text-black"
+    required
+  />
+</div>
+<div className="space-y-2">
+  <Label htmlFor="content" className="text-black">Content</Label>
+  <Textarea
+    id="content"
+    placeholder="Share your thoughts..."
+    value={content}
+    onChange={(e) => setContent(e.target.value)}
+    className="min-h-[120px] bg-[#e8f4e5] border-0 text-black"
+    required
+  />
+</div>
+
           <Button type="submit" className="w-full bg-[#6b9a5b] hover:bg-[#5a8249] text-white">
             Create Post
           </Button>

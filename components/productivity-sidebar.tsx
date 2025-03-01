@@ -47,7 +47,7 @@ const categories = [
   {
     title: "Study & Learning Efficiency",
     icon: Brain,
-    route: "/study-efficiency",
+    route: "/dashboard/learning",
   },
   {
     title: "Productivity Analytics",

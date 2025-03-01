@@ -8,17 +8,22 @@ import Navbar from "@/components/Navbar";
 import ForumHeader from "@/components/forum-header"
 import PostForm from "@/components/post-form"
 import PostList from "@/components/post-list"
+import { redirect } from "next/navigation"
+
 import { BentoGrid } from '@/components/ui/bento-grid';
 // import { BentoGridDemo } from './home/page';
 import { Cover } from '@/components/ui/cover';
 import ProductivityDashboard from './dashboard/productivity-analytics/page';
 import { GoalDashboard } from '@/components/goal-dashboard';
 import HomePage from './home/page';
+import { Workspace } from "@/components/workspace"
 // import { GlowingEffectDemo } from './home/page';
-
 function page() {
+
   return (
+
     <div>
+      
       <Navbar/>
       <div>
 
@@ -29,6 +34,8 @@ function page() {
     </div>
       {/* <BentoGridDemo/> */}
     </div>
+    // <Workspace />
+
   )
 }
 
